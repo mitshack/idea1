@@ -11,7 +11,7 @@ $pass=0;
 $batchs='';
 $last_query='';
 
-$placed_query=$mysqli->query("SELECT * FROM placed where college_id='MUT15CS001'");
+
 
 ?>
 <!doctype html>
@@ -55,15 +55,10 @@ $(function(){
 <header>
       <div class="container">
         <div id="branding">
-          <h1><span class="highlight">MITS</span> Placement Portal </h1>
+          <h1><span class="highlight">HOTEL</span>  </h1>
         </div>
         <nav>
-          <ul>
-            <!--li><img src="add_child.png" width="200" height="142"></li-->
-            <li><a href="index.php">Home</a></li>
-            <li class="current"><a href="placement.php">Placements</a></li>
-
-          </ul>
+         
         </nav>
       </div>
     </header>
@@ -71,29 +66,14 @@ $(function(){
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {  
-    if (($_POST['search']!="")&&isset($_POST['users'])) { //user logging in
-      $batchs=$_POST['users'];
+    if (($_POST['search']!="")) { //user logging in
+   
       $searchitem = $_POST['search'];
-      if($_POST['users']=='100')
-      {
+
         $result = $mysqli->query("SELECT * FROM placed WHERE college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%'");
        $_SESSION['query'] = "SELECT * FROM placed WHERE college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%'";
       }
-      else
-      $result = $mysqli->query("SELECT * FROM placed WHERE batch='$batchs' and ( college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%')");
-         $_SESSION['query'] = "SELECT * FROM placed WHERE batch='$batchs' and ( college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%')";
-    }
-    elseif (($_POST['users']=='100')&&($_POST['search']=="")) {
-      $result = $mysqli->query("SELECT * FROM placed;");
-       $_SESSION['query'] = "SELECT * FROM placed;";
-    }
-  else if (isset($_POST['users']))
-  { 
-    $batchs=$_POST['users'];
-    $result = $mysqli->query("SELECT * FROM placed WHERE batch='$batchs'");
-    $_SESSION['query'] = "SELECT * FROM placed WHERE batch='$batchs'";
 
-  }
 
 
 
@@ -130,15 +110,7 @@ while ($row1 = $placed_query->fetch_assoc()) {
 
   <div class="dropdown">
 
-<select name="users" class="dropbtn" onchange="showUser(this.value)">
-  <option value="100">All Batch</option>
-<?php 
-    foreach ($batches as $rows) :?>
-      <option <?php if($batchs == $rows['batch']){echo("selected");}?> value="<?=$rows['batch']?>"><?=$rows['batch']?></option>
-      <?php $dropdown_count=$dropdown_count + 1?>
-<?php endforeach;?>
 
-  </select>
 
  
   <input type="text" name="search" placeholder="Search.." value="<?=$searchitem?>">
@@ -181,42 +153,12 @@ while ($row1 = $placed_query->fetch_assoc()) {
 
 
 </div>
-<div class="dropdown">
-<form >
-<button id="export_button" name="button" class="dropbtn" onclick="clickHandler()" >Book</button>
-</form>
-</div>
+
 
 
 </div>
 
-<script>
-    function clickHandler() {
-      <?php
-       // File Name
-// Download file
 
-
-$lastquery=$_SESSION['query'];
-$placed_query=$mysqli->query("$lastquery");
-// Write data to file
-$flag = false;
-while ($row1 = $placed_query->fetch_assoc()) {
-    if (!$flag) {
-
-        echo implode("\t", array_keys($row1)) . "\r\n";
-        $flag = true;
-    }
-        echo implode("\t", array_values($row1)) . "\r\n";
-} 
-$filename = "Placed.xls";
-header("Content-Disposition: attachment; filename=\"$filename\"");
-header("Content-Type: application/vnd.ms-excel");
-
-?>
-
-    }
-</script>
 
 </body>
 </html>
