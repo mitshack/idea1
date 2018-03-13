@@ -79,29 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 }
 ?>
-<?php  
-if(isset($_GET['button']))
-{
 
-$filename = "Placed.xls"; // File Name
-// Download file
-header("Content-Disposition: attachment; filename=\"$filename\"");
-header("Content-Type: application/vnd.ms-excel");
-
-$lastquery=$_SESSION['query'];
-$placed_query=$mysqli->query($lastquery);
-// Write data to file
-$flag = false;
-while ($row1 = $placed_query->fetch_assoc()) {
-    if (!$flag) {
-
-        echo implode("\t", array_keys($row1)) . "\r\n";
-        $flag = true;
-    }
-        echo implode("\t", array_values($row1)) . "\r\n";
-}
-}
-?>
 
 <body>
 <div id="wrapper">
