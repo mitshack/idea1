@@ -70,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
    
       $searchitem = $_POST['search'];
 
-        $result = $mysqli->query("SELECT * FROM placed WHERE college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%'");
-       $_SESSION['query'] = "SELECT * FROM placed WHERE college_id like '%".$searchitem. "%' or student_name like '%".$searchitem."%' or company like'".$searchitem."%' or batch like '%" .$searchitem. "%' or salary_package like '%" .$searchitem."%'";
+        $result = $mysqli->query("SELECT * FROM placed WHERE item like '%".$searchitem. "%' or price like '%".$searchitem."%' or  like'".$searchitem."%' or availability like '%" .$searchitem. "%' or delivery like '%" .$searchitem."%'");
+      
       }
 
 
