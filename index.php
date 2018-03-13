@@ -19,7 +19,7 @@ $last_query='';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html">
-  <title>MITS | Placements</title>
+  <title>Hotel</title>
 
   <?php include 'css/css.html'; ?>
   <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
